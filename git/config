@@ -1,6 +1,6 @@
-[user]
-  name = Iskander Ignatev
-  email = iskander.ignatev@gmail.com
+[filesystem "Oracle Corporation|11.0.7|/dev/disk1s2"]
+	timestampResolution = 8000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
 
 [alias]
   s = status
@@ -24,3 +24,15 @@
 
 [rebase]
   autosquash = true
+
+[init]
+	defaultBranch = main
+
+[includeIf "gitdir:~/work/nau/"]
+  path = ~/.config/.gitconfig-nau
+
+[include]
+  path = ~/.config/.gitconfig-default
+
+[core]
+	excludesFile = ~/.gitignore
