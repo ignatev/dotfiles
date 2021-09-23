@@ -1,0 +1,10 @@
+[user]
+	name = Iskander Ignatev
+	email = iignatyev@nautilus.com
+	signingkey = 7376212431507E745E48F68EE90CC654F84A3172
+
+[commit]
+	gpgSign = true
+
+[core]
+	 sshCommand = "ssh -i ~/.ssh/id_rsa_nau -F /dev/null"
