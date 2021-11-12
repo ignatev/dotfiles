@@ -1,4 +1,5 @@
 " Add the dein installation directory into runtimepath
+"
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
@@ -34,7 +35,11 @@ call dein#add('preservim/nerdtree')
 call dein#add('tpope/vim-fugitive')
 call dein#add('mhinz/vim-signify')
 call dein#add('arzg/vim-substrata')
+call dein#add('overcache/NeoSolarized')
+call dein#add('wsdjeg/dein-ui.vim')
 call dein#add('junegunn/rainbow_parentheses.vim')
+call dein#add('sonph/onehalf', {'rtp': 'vim/'})
+
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
@@ -43,20 +48,50 @@ inoremap <expr> <C-n>  deoplete#manual_complete()
 " let g:gruvbox_contrast_dark = 'hard'
 " colorscheme gruvbox
 
-:set number relativenumber
+set number relativenumber
 
-set t_Co=256
-set termguicolors
+" set t_Co=256
+" set termguicolors
 
 
-let g:edge_style = 'neon'
-let g:edge_enable_italic = 0
-let g:edge_disable_italic_comment = 1
-colorscheme edge
-highlight Normal ctermfg=grey ctermbg=black
+""""""""""""""""""" edge colorscheme
+" let g:edge_style = 'neon'
+" let g:edge_enable_italic = 0
+" let g:edge_disable_italic_comment = 1
+" colorscheme edge
+" highlight Normal ctermfg=grey ctermbg=black
+""""""""""""""""""" edge colorscheme
 
+
+""""""""""""""""""" solarized theme
+" let g:solarized_italic_comments = v:true
+" let g:solarized_italic_keywords = v:true
+" let g:solarized_italic_functions = v:true
+" let g:solarized_italic_variables = v:false
+" let g:solarized_contrast = v:true
+" let g:solarized_borders = v:false
+" let g:solarized_disable_background = v:false
+
+" colorscheme solarized
+
+"""""""""""""""""" solarized theme
+
+" whitespaces
+" set list
+" set lcs=tab:\t--,trail:·
+" set background=light
+" colorscheme NeoSolarized
+
+""""""""""""""""""
+set background=light
+highlight clear
+syntax reset
+
+colorscheme onehalflight
+let g:airline_theme='onehalflight'
 
 autocmd TextChanged,TextChangedI <buffer> silent write
+
 
 :set tabstop=4
 :set shiftwidth=4
@@ -73,6 +108,7 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_test_show_name = 1
+
 " NerdTree
 " map <C-z> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -120,6 +156,7 @@ nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
 autocmd FileType go nmap <leader>b <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>T :!go test -v<CR>
 set autowrite
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -162,9 +199,9 @@ function! TermToggle(height)
 endfunction
 
 " Toggle terminal on/off (neovim)
-nnoremap <leader>e :call TermToggle(12)<CR>
-inoremap <leader>e <Esc>:call TermToggle(12)<CR>
-tnoremap <leader>e <C-\><C-n>:call TermToggle(12)<CR>
+nnoremap <leader>e :call TermToggle(40)<CR>
+inoremap <leader>e <Esc>:call TermToggle(40)<CR>
+tnoremap <leader>e <C-\><C-n>:call TermToggle(40)<CR>
 
 " Terminal go back to normal mode
 tnoremap <Esc> <C-\><C-n>
@@ -174,3 +211,25 @@ augroup quickfix
     autocmd!
     autocmd FileType qf setlocal wrap
 augroup END
+
+
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+" nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
