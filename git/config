@@ -3,6 +3,7 @@
 	minRacyThreshold = 0 nanoseconds
 
 [alias]
+  ssu = submodule update --init --recursive
   s = status
   ss = status .
   rv = remote -v
